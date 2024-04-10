@@ -63,22 +63,33 @@ class LinkedList {
 
     // (7)
     pop() {
+        if (this.length <= 0) {
+            return null;
+        }
+        if (this.length === 1) {
+            this.head = null;
+            this.tail = null;
+            this.length--;
+        }
         let currentNode = this.head;
         let secondTolastNode;
         for (let i = 0; i < this.length; i++) {
             if (currentNode.next == this.tail) {
                 secondTolastNode = currentNode;
+                secondTolastNode.next = null;
+                this.tail = secondTolastNode;
+                this.length--;
             } else {
                 currentNode = currentNode.next;
             }
         }
-        secondTolastNode.next = null;
-        this.tail = secondTolastNode;
-        this.length--;
     }
 
     // (8)
     contains(value) {
+        if (this.length <= 0) {
+            return null;
+        }
         let currentNode = this.head;
         for (let i = 0; i < this.length; i++) {
             if (currentNode.value == value) {
@@ -92,6 +103,9 @@ class LinkedList {
 
     // (9)
     find(value) {
+        if (this.length <= 0) {
+            return null;
+        }
         let currentNode = this.head;
         for (let i = 0; i < this.length; i++) {
             if (currentNode.value == value) {
@@ -106,6 +120,9 @@ class LinkedList {
 
     // (10)
     toString() {
+        if (this.length <= 0) {
+            return null;
+        }
         let currentNode = this.head;
         let listAsString = '';
         for (let i = 0; i < this.length; i++) {
@@ -129,9 +146,11 @@ myList.append(5);
 myList.append(6);
 myList.append(7);
 myList.prepend(2);
-myList.pop();
-
 console.log(myList);
+myList.pop();
+console.log(myList);
+
+console.log(myList.size);
 
 console.log(myList.at(1));
 console.log(myList.at(7));
@@ -139,6 +158,6 @@ console.log(myList.at(7));
 console.log(myList.contains(3));
 console.log(myList.contains(7));
 
-console.log(myList.find(3));
+console.log(myList.find(5));
 
 console.log(myList.toString())
