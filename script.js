@@ -3,8 +3,6 @@ class ListNode {
         this.value = value;
         this.next = null;
     };
-
-
 }
 
 class LinkedList {
@@ -108,7 +106,17 @@ class LinkedList {
 
     // (10)
     toString() {
-
+        let currentNode = this.head;
+        let listAsString = '';
+        for (let i = 0; i < this.length; i++) {
+            if (currentNode.next === null) {
+                listAsString += `( ${currentNode.value} )`
+            } else {
+            listAsString += `( ${currentNode.value} ) -> `
+            currentNode = currentNode.next;
+            }
+        }
+        return listAsString;
     }
 }
 
@@ -119,6 +127,7 @@ myList.append(3);
 myList.append(4);
 myList.append(5);
 myList.append(6);
+myList.append(7);
 myList.prepend(2);
 myList.pop();
 
@@ -130,4 +139,6 @@ console.log(myList.at(7));
 console.log(myList.contains(3));
 console.log(myList.contains(7));
 
-console.log(myList.find(7));
+console.log(myList.find(3));
+
+console.log(myList.toString())
