@@ -1,0 +1,133 @@
+class ListNode {
+    constructor(value) {
+        this.value = value;
+        this.next = null;
+    };
+
+
+}
+
+class LinkedList {
+    constructor() {
+        this.head = null; // (4)
+        this.tail = null; // (5)
+        this.length = 0;
+    }
+
+    // (1)
+    append(value) {
+        const endNode = new ListNode(value);
+        if (this.length === 0) {
+            this.head = endNode;
+            this.tail = endNode;
+        } else {
+            this.tail.next = endNode;
+            this.tail = endNode;
+        }
+        this.length++;
+    }
+
+    // (2)
+    prepend(value) {
+        const startNode = new ListNode(value);
+        let currentHead = this.head;
+        if (this.length === 0) {
+            this.head = startNode;
+            this.tail = startNode;
+        } else {
+            startNode.next = currentHead;
+            this.head = startNode;
+        }
+        this.length++;
+    }
+
+    // (3)
+    get size() {
+        return this.length;
+    }
+
+    // (6)
+    at(index) {
+        if (index < 0 || index > this.length) {
+            return null;
+        }
+        if (index === 0) {
+            return this.head;
+        }
+        let currentNode = this.head;
+        let i = 0;
+        while (i < index) {
+            i++;
+            currentNode = currentNode.next;
+        }
+        return currentNode;
+    }
+
+    // (7)
+    pop() {
+        let currentNode = this.head;
+        let secondTolastNode;
+        for (let i = 0; i < this.length; i++) {
+            if (currentNode.next == this.tail) {
+                secondTolastNode = currentNode;
+            } else {
+                currentNode = currentNode.next;
+            }
+        }
+        secondTolastNode.next = null;
+        this.tail = secondTolastNode;
+        this.length--;
+    }
+
+    // (8)
+    contains(value) {
+        let currentNode = this.head;
+        for (let i = 0; i < this.length; i++) {
+            if (currentNode.value == value) {
+                return true;
+            } else {
+                currentNode = currentNode.next;
+                if (currentNode.next === null) {
+                    return false;
+            }}}    
+    }
+
+    // (9)
+    find(value) {
+        let currentNode = this.head;
+        for (let i = 0; i < this.length; i++) {
+            if (currentNode.value == value) {
+                let index = i;
+                return index;
+            } else {
+                currentNode = currentNode.next;
+                if (currentNode.next === null) {
+                    return null;
+            }}}
+    }
+
+    // (10)
+    toString() {
+
+    }
+}
+
+
+// TESTS
+const myList = new LinkedList;
+myList.append(3);
+myList.append(4);
+myList.append(5);
+myList.append(6);
+myList.prepend(2);
+myList.pop();
+
+console.log(myList);
+
+console.log(myList.at(1));
+console.log(myList.at(7));
+
+console.log(myList.contains(3));
+console.log(myList.contains(7));
+
+console.log(myList.find(7));
