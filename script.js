@@ -135,6 +135,51 @@ class LinkedList {
         }
         return listAsString;
     }
+
+    // (extra credit 1)
+    insertAt(value, index) {
+        if (index === 0) {
+            this.prepend(value);
+        }
+        if (index === this.length) {
+            this.append(value);
+        }
+        if (index > this.length + 1) {
+            return null;
+        }
+        let currentNode = this.head;
+        for (let i = 0; i < this.length; i++) {
+            if (i === index - 1) {
+                let previousNode = currentNode;
+                let nextNode = currentNode.next;
+                const newNode = new ListNode(value);
+                previousNode.next = newNode;
+                newNode.next = nextNode;
+                this.length++;
+            }
+            currentNode = currentNode.next;
+        }
+    }
+
+    // (extra credit 2)
+    removeAt(index) {
+        let currentNode = this.head;
+        if (index === 0) {
+            this.head = this.head.next;
+            this.length--;
+        }
+        for (let i = 0; i < this.length; i++) {
+            if (i === index - 1) {
+                let previousNode = currentNode;
+                let nodeToDelete = currentNode.next;
+                let nextNode = currentNode.next.next;
+                previousNode.next = nextNode;
+                this.length --;
+            } else {
+                currentNode = currentNode.next;
+            }
+        }
+    }
 }
 
 
@@ -161,3 +206,7 @@ console.log(myList.contains(7));
 console.log(myList.find(5));
 
 console.log(myList.toString())
+
+myList.removeAt(0);
+console.log(myList)
+console.log(myList.toString());
